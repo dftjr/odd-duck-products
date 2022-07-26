@@ -1,1 +1,27 @@
-
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(107, 250, 229);
+    color: rgb(121, 31, 255);
+  }
+  
+  h1 {
+    color: rgb(60, 0, 157);
+    line-height: .8;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  
+  main {
+    width: 1024px;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows:  25px 75px 15% 30%  10%  75px 30%  25px 15%;
+  }
+  
