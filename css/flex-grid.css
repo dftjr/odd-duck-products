@@ -1,12 +1,13 @@
 main {
-    width: 500px;
-    height: 500px;
+  display: flex;  
+  width: 1080px;
+    height: 720px;
   }
 
   main {
     display: grid;
-    grid-template-rows: 25% 50% 25%;
-    grid-template-columns: 25% 500px 75%;
+    grid-template-rows: 15% 40% 5% 30% 10%;
+    grid-template-columns: 25% 75%;
   }
 
   .container {
