@@ -1,4 +1,40 @@
 main {
-    width: 80%;
-    margin: 3rem auto;
+    width: 500px;
+    height: 500px;
+  }
+
+  main {
+    display: grid;
+    grid-template-rows: 25% 50% 25%;
+    grid-template-columns: 25% 500px 75%;
+  }
+
+  .container {
+    border: 1px solid black;
+    display: inline-flex;
+    /* for 2nd step: */
+    /* flex-wrap: wrap; */
+  }
+  
+  .container div {
+    background-color: lightgray;
+    margin: .5rem;
+    border: 1px solid black;
+    flex: 1 1 20%;
+    /* for 2nd step: */
+    /* height: 7rem; */
+  }
+  
+  /* for 2nd step: change selector to:
+  div:nth-child(4n + 2)  */
+  div:nth-child(2) {
+    flex: 0 1 10%;
+    background-color: lightgreen;
+  }
+  
+  /* for 2nd step: change selector to:
+  div:nth-child(4n)  */
+  div:nth-child(4) {
+    flex: 3 0 40%;
+    background-color: skyblue;
   }

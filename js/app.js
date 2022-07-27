@@ -1,6 +1,3 @@
-
-
-
 console.log('Hi');
 
 let myContainer = document.querySelector('section');
@@ -12,12 +9,9 @@ let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
 
-
-let totalRounds = 25;
-
 let allDucks = [];
 let clicks = 0;
-let clicksAllowed = 3;
+let clicksAllowed = 6;
 
 function Ducks(name, fileExtension = 'jpg') {
   this.name = name;
@@ -30,22 +24,28 @@ function getRandomDuck() {
   return Math.floor(Math.random() * allDucks.length);
 }
 
+let renderDucksArray =[];
+
 function renderDucks() {
-  let d1 = getRandomDuck();
-  let d2 = getRandomDuck();
-  let d3 = getRandomDuck();
-  while (d1 === d2 || d1 === d3 || d2 === d3) {
-    d1 = getRandomDuck();
-     while(d2 === d3) {
-      d2 = getRandomDuck();
+  console.log(renderDucksArray);
+  while (renderDucksArray.length < 6) {
+    let ranNum = getRandomDuck();
+    if (!renderDucksArray.includes(ranNum)){
+      renderDucksArray.push(ranNum);
+      console.log(renderDucksArray);
     }
   }
+  console.log(renderDucksArray);
+  let d1 = renderDucksArray.shift();
+  let d2 = renderDucksArray.shift();
+  let d3 = renderDucksArray.shift();
+  console.log(renderDucksArray);
   image1.src = allDucks[d1].src;
-  image1.src = allDucks[d1].name;
+  image1.alt = allDucks[d1].name;
   image2.src = allDucks[d2].src;
-  image2.src = allDucks[d2].name;
+  image2.alt = allDucks[d2].name;
   image3.src = allDucks[d3].src;
-  image3.src = allDucks[d3].name;
+  image3.alt = allDucks[d3].name;
   allDucks[d1].views++;
   allDucks[d2].views++;
   allDucks[d3].views++;
@@ -57,15 +57,14 @@ function handleDuckClick(event) {
   }
   clicks++
   let clickedDuck = event.target.alt;
-  console.log(clickedDuck);
-  for (let i = 0; i < allGoats.length; i++) {
+  for (let i = 0; i < allDucks.length; i++) {
     if (clickedDuck === allDucks[i].name) {
       allDucks[i].clicks++;
       break;
     }
   }
   renderDucks();
-  if (clicks === clicksAllowes) {
+  if (clicks === clicksAllowed) {
     myButton.className = 'clicks-allowed';
     myContainer.removeEventListener('click', handleDuckClick);
     myButton.addEventListener('click', handleButtonClick);
