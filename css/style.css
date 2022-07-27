@@ -29,4 +29,7 @@
     grid-row-end: 3;
   }
 
+  section + div {
+    grid-column-start: 2;
+  }
   
