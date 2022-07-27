@@ -68,6 +68,7 @@ function handleDuckClick(event) {
     myButton.className = 'clicks-allowed';
     myContainer.removeEventListener('click', handleDuckClick);
     myButton.addEventListener('click', handleButtonClick);
+    renderChart();
   }
 }
 
@@ -82,6 +83,8 @@ function renderResults() {
     ul.appendChild(li);
   }
 }
+
+
 
 let duck1 = new Ducks('bag');
 let duck2 = new Ducks('banana');
@@ -108,3 +111,61 @@ allDucks.push(duck1, duck2, duck3, duck4, duck5, duck6, duck8, duck9, duck10, du
 renderDucks();
 
 myContainer.addEventListener('click', handleDuckClick);
+
+// CHART.JS
+function renderChart() {
+
+  console.log(allDucks[0].name)
+  let duckNames = [];
+  let duckViews = [];
+  let duckClicks = [];
+  for (let i = 0; i < allDucks.length; i++) {
+    duckNames.push(allDucks[i].name);
+    duckViews.push(allDucks[i].views);
+    duckClicks.push(allDucks[i].clicks);
+  }
+  console.log(duckNames);
+  console.log(duckViews);
+  console.log(duckClicks);
+
+  // const labels = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'gray'];
+
+  const data = {
+    labels: duckNames,
+    datasets: [
+      {
+        label: 'Views',
+        data: duckViews,
+        backgroundColor: [
+          'rgba(217, 0, 47, 0.2)'
+        ],
+        borderColor: [
+          'rgb(217, 0, 47, .8)'
+        ],
+        borderWidth: 2
+      },
+      {
+        label: 'Votes',
+        data: duckClicks,
+        backgroundColor: [
+          'rgba(14, 235, 36, 0.8)'
+        ],
+        borderColor: [
+          'rgb(217, 0, 47, .2)',
+        ],
+        borderWidth: 2
+      }
+    ]
+  };
+
+  const config = {
+    type: 'polarArea',
+    data: data,
+    options: {}
+  };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+}
