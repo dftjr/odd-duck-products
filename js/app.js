@@ -8,16 +8,30 @@ let ul = document.querySelector('ul');
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
+let resultsLists = document.querySelector('ul');
 
 let allDucks = [];
 let clicks = 0;
 let clicksAllowed = 6;
+
+Ducks.allProducts = [];
+
+function updateStorage(){
+  const arrayString = JSON.stringify(Ducks.allProducts);
+  console.log(arrayString);
+  localStorage.setItem('ducks', arrayString);
+
+}
 
 function Ducks(name, fileExtension = 'jpg') {
   this.name = name;
   this.src = `assets/${this.name}.${fileExtension}`;
   this.views = 0;
   this.clicks = 0;
+
+  Ducks.allProducts.push(this);
+
+  updateStorage();
 }
 
 function getRandomDuck() {
@@ -55,7 +69,7 @@ function handleDuckClick(event) {
   if (event.target === myContainer) {
     alert('Please click on an image');
   }
-  clicks++
+  clicks++;
   let clickedDuck = event.target.alt;
   for (let i = 0; i < allDucks.length; i++) {
     if (clickedDuck === allDucks[i].name) {
@@ -73,7 +87,7 @@ function handleDuckClick(event) {
 }
 
 function handleButtonClick() {
-    renderResults();
+  renderResults();
 }
 
 function renderResults() {
@@ -83,8 +97,6 @@ function renderResults() {
     ul.appendChild(li);
   }
 }
-
-
 
 let duck1 = new Ducks('bag');
 let duck2 = new Ducks('banana');
@@ -106,7 +118,7 @@ let duck17 = new Ducks('unicorn');
 let duck18 = new Ducks('water-can');
 let duck19 = new Ducks('wine-glass');
 
-allDucks.push(duck1, duck2, duck3, duck4, duck5, duck6, duck8, duck9, duck10, duck11, duck12, duck13, duck14, duck15, duck16, duck17, duck18, duck19);
+allDucks.push(duck1, duck2, duck3, duck4, duck5, duck6, duck7, duck8, duck9, duck10, duck11, duck12, duck13, duck14, duck15, duck16, duck17, duck18, duck19);
 
 renderDucks();
 
@@ -115,7 +127,7 @@ myContainer.addEventListener('click', handleDuckClick);
 // CHART.JS
 function renderChart() {
 
-  console.log(allDucks[0].name)
+  console.log(allDucks[0].name);
   let duckNames = [];
   let duckViews = [];
   let duckClicks = [];
@@ -127,8 +139,6 @@ function renderChart() {
   console.log(duckNames);
   console.log(duckViews);
   console.log(duckClicks);
-
-  // const labels = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'gray'];
 
   const data = {
     labels: duckNames,
@@ -168,4 +178,17 @@ function renderChart() {
     document.getElementById('myChart'),
     config
   );
+}
+
+Ducks.prototype.renderADuck = function () {
+  let liElement = document.createElement('li');
+  liElement.textContent = `Product:${this.name}, Views:${this.views}, Clicks:${this.clicks}`;
+  resultsLists.appendChild(liElement);
+}
+
+function getDucksSaved(){
+  const data = localStorage.getItem('ducks');
+  const duckData =  JSON.parse(data);
+  Ducks.allProducts =duckData;
+  renderADuck();
 }
