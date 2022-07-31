@@ -8,6 +8,8 @@ let ul = document.querySelector('ul');
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
+
+let storedData = document.getElementById('tbody');
 let resultsLists = document.querySelector('ul');
 
 let allDucks = [];
@@ -16,7 +18,7 @@ let clicksAllowed = 6;
 
 Ducks.allProducts = [];
 
-function updateStorage(){
+function updateStorage() {
   const arrayString = JSON.stringify(Ducks.allProducts);
   console.log(arrayString);
   localStorage.setItem('ducks', arrayString);
@@ -38,13 +40,13 @@ function getRandomDuck() {
   return Math.floor(Math.random() * allDucks.length);
 }
 
-let renderDucksArray =[];
+let renderDucksArray = [];
 
 function renderDucks() {
   console.log(renderDucksArray);
   while (renderDucksArray.length < 6) {
     let ranNum = getRandomDuck();
-    if (!renderDucksArray.includes(ranNum)){
+    if (!renderDucksArray.includes(ranNum)) {
       renderDucksArray.push(ranNum);
       console.log(renderDucksArray);
     }
@@ -186,9 +188,32 @@ Ducks.prototype.renderADuck = function () {
   resultsLists.appendChild(liElement);
 }
 
-function getDucksSaved(){
-  const data = localStorage.getItem('ducks');
-  const duckData =  JSON.parse(data);
-  Ducks.allProducts =duckData;
-  renderADuck();
+
+let cart = {};
+if (localStorage.getItem('ducks')) {
+  cart = JSON.parse(localStorage.getItem('ducks'));
+}
+
+let tbody = document.getElementById('tbody');
+
+for (let id in cart) {
+  let item = cart[id];
+
+  let tr = document.createElement('tr')
+
+  let title_td = document.createElement('td')
+  title_td.textContent = item.title
+  tr.appendChild(title_td)
+
+
+  let price_td = document.createElement('td');
+  price_td.textContent = item.price;
+  tr.appendChild(price_td);
+
+  let qty_td = document.createElement('td');
+  qty_td.textContent = item.qty;
+  tr.appendChild(qty_td);
+
+  tbody.appendChild(tr)
+
 }
