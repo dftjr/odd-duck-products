@@ -11,7 +11,11 @@
   }
   
   h1 {
-    border: 1px solid black;
+    border-width:11px;
+    font-size: 4em;
+    text-align: center;
+    margin: auto;
+    border: solid rgb(0, 0, 0);
     color: rgb(60, 0, 157);
     line-height: .8;
     grid-column-start: 2;
@@ -23,9 +27,27 @@
   .container {
     display: flex;
     align-content: center;
-    border: solid 1px black;
+    border: solid 5px black;
     grid-column-start: 2;
     grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  h3 {
+    text-align: center;
+    border: solid 1px black;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  ul {
+    text-align: center;
+
+    grid-column-start: 1;
+    grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
   }
