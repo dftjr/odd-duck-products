@@ -14,7 +14,7 @@ let resultsLists = document.querySelector('ul');
 
 let allDucks = [];
 let clicks = 0;
-let clicksAllowed = 6;
+let clicksAllowed = 25;
 
 Ducks.allProducts = [];
 
